@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "*.meshconfig": "json",
+    "status.json": "json"
+  },
+  "workbench.iconTheme": "mesh-icons",
+  "mesh.iconPath": "${workspaceFolder}/mesh_icon.svg"
+}

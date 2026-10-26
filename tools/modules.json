@@ -1,0 +1,116 @@
+{
+  "modules": [
+    {
+      "name": "admin",
+      "file": "src/admin.c",
+      "summary": "Admin command router and help.",
+      "command": "mesh admin",
+      "depends_on": [
+        "admin_support",
+        "admin_doctor",
+        "admin_verify",
+        "admin_inventory",
+        "admin_gc",
+        "admin_refs",
+        "admin_status",
+        "admin_audit",
+        "admin_quota",
+        "admin_config",
+        "admin_history",
+        "admin_export"
+      ]
+    },
+    {
+      "name": "admin_support",
+      "file": "src/admin_support.c",
+      "summary": "Registry, hash set and store accounting.",
+      "command": "internal",
+      "depends_on": []
+    },
+    {
+      "name": "admin_doctor",
+      "file": "src/admin_doctor.c",
+      "summary": "Repository layout and metadata health checks.",
+      "command": "mesh admin doctor",
+      "depends_on": []
+    },
+    {
+      "name": "admin_verify",
+      "file": "src/admin_verify.c",
+      "summary": "Object and manifest integrity verification.",
+      "command": "mesh admin verify",
+      "depends_on": [
+        "admin_support"
+      ]
+    },
+    {
+      "name": "admin_inventory",
+      "file": "src/admin_inventory.c",
+      "summary": "Store, ref and conflict inventory.",
+      "command": "mesh admin inventory",
+      "depends_on": [
+        "admin_support"
+      ]
+    },
+    {
+      "name": "admin_gc",
+      "file": "src/admin_gc.c",
+      "summary": "Unreachable object collection with dry-run first.",
+      "command": "mesh admin gc",
+      "depends_on": [
+        "admin_support"
+      ]
+    },
+    {
+      "name": "admin_refs",
+      "file": "src/admin_refs.c",
+      "summary": "Branch, tag and HEAD reference validation.",
+      "command": "mesh admin refs",
+      "depends_on": []
+    },
+    {
+      "name": "admin_status",
+      "file": "src/admin_status.c",
+      "summary": "Refresh the passive monitor status document.",
+      "command": "mesh admin status",
+      "depends_on": []
+    },
+    {
+      "name": "admin_audit",
+      "file": "src/admin_audit.c",
+      "summary": "Append and read the local admin audit log.",
+      "command": "mesh admin audit",
+      "depends_on": []
+    },
+    {
+      "name": "admin_quota",
+      "file": "src/admin_quota.c",
+      "summary": "Report and enforce a store byte quota.",
+      "command": "mesh admin quota",
+      "depends_on": [
+        "admin_support"
+      ]
+    },
+    {
+      "name": "admin_config",
+      "file": "src/admin_config.c",
+      "summary": "Validate local configuration and identity values.",
+      "command": "mesh admin config",
+      "depends_on": []
+    },
+    {
+      "name": "admin_history",
+      "file": "src/admin_history.c",
+      "summary": "Validate history and reflog records.",
+      "command": "mesh admin history",
+      "depends_on": []
+    },
+    {
+      "name": "admin_export",
+      "file": "src/admin_export.c",
+      "summary": "Export the snapshot graph as JSON.",
+      "command": "mesh admin export",
+      "depends_on": []
+    }
+  ]
+}

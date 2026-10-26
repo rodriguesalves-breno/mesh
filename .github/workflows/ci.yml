@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install libcurl and ICU
+        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libicu-dev
+      - name: Build and test
+        run: make ci CC=${{ matrix.compiler }}
+
+  sanitizers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install libcurl, ICU and Clang
+        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libicu-dev clang
+      - name: ASan and UBSan
+        run: make sanitize
+
+  static-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install libcurl and ICU
+        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libicu-dev
+      - name: GCC analyzer
+        run: make analyze
+
+  fuzz-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install libcurl, ICU and Clang
+        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libicu-dev clang
+      - name: Manifest parser fuzzing
+        run: make fuzz FUZZ_RUNS=5000
+
+  macos-build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install libcurl, pkg-config and ICU
+        run: brew install curl pkg-config icu4c
+      - name: Build
+        run: make all CC=clang CFLAGS="-I$(brew --prefix icu4c)/include -I$(brew --prefix curl)/include" LDFLAGS="-L$(brew --prefix icu4c)/lib -L$(brew --prefix curl)/lib"
