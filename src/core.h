@@ -2,7 +2,7 @@
 * Mesh - unified core header.
 * Every subsystem speaks through this header. The style is deliberately
 * C17 + POSIX, no object orientation, no hidden allocation, no magic.
-* Copyright (C) 2026 The Mesh Authors. GPL-2.0-only.
+* Copyright (C) 2026 Breno Rodrigues Alves. GPL-2.0-only.
 */
 #ifndef MESH_CORE_H
 #define MESH_CORE_H
